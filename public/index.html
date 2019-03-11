@@ -27,23 +27,22 @@
     </style>
   </head>
   <body>
-    <div id="message">
-        
+    <div id="app">
+      <p>{{ message }} </p>
+      <input v-model="message">
     </div>
+
     <p id="load">Firebase SDK Loading&hellip;</p>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
         // // The Firebase SDK is initialized and available here!
         //
         // firebase.auth().onAuthStateChanged(user => { });
         // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
         // firebase.messaging().requestPermission().then(() => { });
         // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
+        
         try {
           let app = firebase.app();
           let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
@@ -52,6 +51,17 @@
           console.error(e);
           document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
         }
+
+        //https://vuejs.org/v2/guide/
+        // > sudo firebase serve -o localhost -p 90
+        var app = new Vue({
+          el: '#app',
+          data: {
+            message: 'Hello Vue!'
+          }
+        });
+
+
       });
     </script>
   </body>
